@@ -28,6 +28,14 @@ fn main() {
     let mut s4 = String::from("Test");
     with_borrowing(&mut s4); // passing as a reference, by having mut, we can change
     println!("{s4}");
+
+    let s5 = String::from("This is an example test");
+    let s6 = first_word(&s5);
+    println!("s5: {s5}, s6: {s6}");
+
+    let s7 = String::from("Example");
+    let s8 = first_word(&s7);
+    println!("s8: {s8}");
 }
 
 fn without_borrowing(s: String) {
@@ -39,4 +47,15 @@ fn with_borrowing(s: &mut String) {
     // s doesn't get deleted because it's only a reference. So when function goes out of scope we
     // still are going to have the data
     println!("{s}");
+}
+
+fn first_word(s: &String) -> String {
+    let mut answer: String = String::from("");
+    for char in s.chars() {
+        if char == ' ' {
+            break;
+        }
+        answer.push(char);
+    }
+    answer
 }
